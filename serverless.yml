@@ -1,0 +1,101 @@
+org: yousefs
+service: QuizTopia-Api-Yousef
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+
+  iam:
+    role: arn:aws:iam::396913740002:role/lecture-role
+
+
+  environment:
+    USERS_TABLE: Quizotopia-UserTable
+    QUIZ_TABLE: Quizotopia-QuizTable
+    LEADERBOARD_TABLE: Quizotopia-leaderboardTable
+    JWT_KEY: ${env:JWT_KEY}
+
+package:
+  individually: true
+
+functions:
+  Signup:
+    handler: functions/Account/Signup/index.handler
+    events:
+      - http:
+          path: /auth/signup
+          method: post
+
+  Login:
+    handler: functions/Account/Login/index.handler
+    events:
+      - http:
+          path: /auth/login
+          method: post
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Quizotopia-UserTable
+        AttributeDefinitions:
+          - AttributeName: UserId
+            AttributeType: S
+          - AttributeName: username
+            AttributeType: S
+        KeySchema:
+          - AttributeName: UserId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: Username-Index
+            KeySchema:
+              - AttributeName: username
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
+
+    QuizeTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Quizotopia-QuizTable
+        AttributeDefinitions:
+          - AttributeName: quizId
+            AttributeType: S
+          - AttributeName: UserId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: quizId
+            KeyType: HASH
+          - AttributeName: UserId
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+
+    LeaderboardTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Quizotopia-leaderboardTable
+        AttributeDefinitions:
+          - AttributeName: quizId
+            AttributeType: S
+          - AttributeName: UserId
+            AttributeType: S
+          - AttributeName: score
+            AttributeType: N
+        KeySchema:
+          - AttributeName: quizId
+            KeyType: HASH
+          - AttributeName: UserId
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: QuizScoreIndex
+            KeySchema:
+              - AttributeName: quizId
+                KeyType: HASH
+              - AttributeName: score
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
