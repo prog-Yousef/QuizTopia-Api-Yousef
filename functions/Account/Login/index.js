@@ -4,6 +4,11 @@ import middy from "@middy/core";
 import jsonBodyParser from "@middy/http-json-body-parser";
 import { comparePassword } from "../../../utils/bcrypt.js";
 import { createToken } from "../../../utils/Jwt/jwt.js";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+
 
 
 const login = async (event) => {
@@ -23,16 +28,16 @@ const login = async (event) => {
         };
 
 const data = await db.query(params);
-const user = data.Items[0];
-if (!user) {
+const User = data.Items[0];
+if (!User) {
     return sendError(404, "User not found");
 }
-const validPassword = await comparePassword(password, user.password);
+const validPassword = await comparePassword(password, User.password);
 if (!validPassword) {
     return sendError(400, {error:"Invalid Password"});
 }
 
-const token = createToken(user.userId);
+const token = createToken(User.UserId);
 return sendResponse(200, { message: 'Login successful', token: token });
 
 } catch (error) {

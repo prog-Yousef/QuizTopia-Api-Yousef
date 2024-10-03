@@ -5,6 +5,9 @@ import middy from '@middy/core';
 import jsonBodyParser from '@middy/http-json-body-parser';
 import { hashPassword } from '../../../utils/bcrypt.js'; 
 import { PutCommand } from '@aws-sdk/lib-dynamodb';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const signup = async (event) => {
     const { username, password } = event.body;

@@ -1,47 +1,51 @@
 import middy from "@middy/core";
-import CheckToken from "../../utils/Jwt/jwt.js";
+import { checkToken } from '../../utils/Jwt/jwt.js';
 import { sendError } from "../../responses/responses.js";
 import { db } from "../../services/db.js";
-import { signup } from "../../functions/Account/Signup/index.js";
+import dotenv from "dotenv";
 
-// Middleware function to check authorization
-const authMiddleware = () => ({
-    before: async (request) => {
-        const authToken = request.event.headers.authorization || request.event.headers.Authorization; 
-        
+dotenv.config();
+
+const authMiddleware = () => {
+    return {
+      before: async (handler) => {
+        const { headers } = handler.event;
+        const authToken = headers.authorization || headers.Authorization ;
+  
         if (!authToken) {
-            throw new Error('Unauthorized');
+          return sendError(401, { error: 'Unauthorized without token' });
         }
-
+  
         try {
-            const token = authToken.split(' ')[1];  // Extract the token from the "Bearer" format
-            const parsedToken = CheckToken(token);  // Validate and decode the token
-
-            // Query DynamoDB for the user
-            const params = {
-                TableName: process.env.USERS_TABLE,
-                Key: {
-                    "userId": parsedToken.userId
-                }
-            };
-            const data = await db.get(params);
-
-            if (!data.Item) {
-                throw new Error('User not found');
+          const token = authToken.replace("Bearer ", "").trim(); // eller split(' ')[1];
+          const verifiedToken = checkToken(token);
+  
+          if (!verifiedToken || !verifiedToken.UserId) {
+            return sendError(401, { error: 'Invalid token' });
+          }
+  
+          const params = {
+            TableName: process.env.USERS_TABLE,
+            Key: {
+              UserId: verifiedToken.UserId
             }
-
-            // Attach the user info to the request for further use
-            request.event.userId = {
-                userId: parsedToken.userId,
-                username: data.Item.username
-            };
-
+          };
+          const user = await db.get(params);
+  
+          if (!user.Item) {
+            return sendError(401, 'User not found');
+          }
+  
+          handler.event.user = {
+            UserId: verifiedToken.UserId,
+            username: user.Item.username
+          };
         } catch (error) {
-            console.log(error, 'Unauthorized');
-            throw new Error('Unauthorized');
+          console.log(error, "token is not valid Unauthorized");
+          return sendError(401, 'Invalid or expired token');
         }
-    }
-});
-
-// Wrapping the handler with Middy and applying the authorization middleware
-export const handler = middy(signup).use(authMiddleware());
+      }
+    };
+  };
+  
+  export default authMiddleware;

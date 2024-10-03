@@ -12,7 +12,8 @@ provider:
 
   environment:
     USERS_TABLE: Quizotopia-UserTable
-    QUIZ_TABLE: Quizotopia-QuizTable
+    QUIZ_TABLE: Quizotopia-QuizTable2
+    QUESTIONS_TABLE: Quizotopia-QuestionsTable
     LEADERBOARD_TABLE: Quizotopia-leaderboardTable
     JWT_KEY: ${env:JWT_KEY}
 
@@ -34,8 +35,39 @@ functions:
           path: /auth/login
           method: post
 
+  CreateQuiz:
+    handler: functions/Quiz/CreateQuiz/index.handler
+    events:
+      - httpApi:
+          path: /quiz
+          method: post
+
 resources:
   Resources:
+
+    QuestionsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Quizotopia-QuestionsTable
+        AttributeDefinitions:
+          - AttributeName: questionId
+            AttributeType: S
+          - AttributeName: quizId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: questionId
+            KeyType: HASH
+          - AttributeName: quizId
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: QuizIdIndex
+            KeySchema:
+              - AttributeName: quizId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
+
     UsersTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -57,10 +89,10 @@ resources:
               ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
 
-    QuizeTable:
+    QuizTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: Quizotopia-QuizTable
+        TableName: Quizotopia-QuizTable2
         AttributeDefinitions:
           - AttributeName: quizId
             AttributeType: S
@@ -76,7 +108,7 @@ resources:
     LeaderboardTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: Quizotopia-leaderboardTable
+        TableName: Quizotopia-LeaderboardTable
         AttributeDefinitions:
           - AttributeName: quizId
             AttributeType: S
