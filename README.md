@@ -1,73 +1,53 @@
+🎉 Quiztopia API
+Quiztopia is a fun and interactive quiz application that offers various endpoints for user management, quiz management, question management, and leaderboard functionalities.
+## 📚Endpoints 
+
+
 User Management
-POST /auth/signup
-Create a new user account.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/auth/signup
-Request Body:
+  POST -`https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/auth/signup` : Create a new user account
 
-json
-Kopiera kod
 {
   "username": "string",
   "password": "string"
 }
-POST /auth/login
-Authenticate a user.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/auth/login
-Request Body:
+POST - https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/auth/login: Authenticate a user
 
-json
-Kopiera kod
+  ```json
 {
   "username": "string",
   "password": "string"
 }
+ ```
 Quiz Management
-POST /quiz
-Create a new quiz.
-URL: https://3icvvxg7q8.execute-api.eu-north-1.amazonaws.com/quiz
-Request Body:
-
-json
-Kopiera kod
+ POST - `https://3icvvxg7q8.execute-api.eu-north-1.amazonaws.com/quiz`: Create a new quiz
+  ```json
 {
   "title": "Planeter"
 }
-GET /quiz
-Retrieve all quizzes.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz
+ ```
+GET - `https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz`: Retrieve all quizzes
 
-GET /quiz/{quizId}
-Retrieve a quiz by quizId.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}
+ GET - `https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}`: Retrive by quizId
 
-DELETE /quiz/{quizId}
-Delete a quiz by quizId.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}
+DELETE -`https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}` : Delete by quizID
 
-Question Management
-POST /quiz/{quizId}/question
-Add a question to a specific quiz.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}/question
-Request Body:
-
-json
-Kopiera kod
+### Question Management
+  POST - https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}/question: Add a question to a specific quiz
+  ```json
 {
   "question": "Vad planeten närmast solen?",
-  "answer": "merkurius"
+  "answer": "merkurius",
+
 }
-GET /quiz/{quizId}/question
-Get all questions for a specific quiz.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}/question
+  ```
+  GET -`https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/{quizId}/question` : Get all questions for a specific quiz
 
 Leaderboard and Gameplay
-GET /leaderBoard/{quizId}
-Get the leaderboard for a specific quiz.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/leaderBoard/{quizId}
+GET - `https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/leaderBoard/{quizId}`: Get the leaderboard for a specific quiz
 
-POST /leaderBoard/{quizId}
-Submit answers and add score to the leaderboard.
-URL: https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/leaderBoard/{quizId}
+POST -`https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/leaderBoard/{quizId}`  Submit answers and add score to leaderboard
 
-🔒 Authentication
-Most endpoints require authentication. Include the JWT token in the Authorization header.
+## Authentication
+Create an account using the /signup endpoint
+Log in using the /login endpoint to receive a JWT token
+Include the JWT token in the Authorization header for all protected endpoints
