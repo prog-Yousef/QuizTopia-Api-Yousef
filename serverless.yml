@@ -64,6 +64,38 @@ functions:
           method: delete
           path: quiz/{quizId} 
 
+    
+  AddQuestion:
+    handler: functions/Quiz/AddQuestion/index.handler
+    events:
+      - http:
+          method: post
+          path: quiz/{quizId}/question 
+
+  GetQuestion:
+    handler: functions/Quiz/GetQuestion/index.handler
+    events:
+      - http:
+          method: get
+          path: quiz/{quizId}/question 
+
+  AddLeaderBoard:
+    handler: functions/LeaderBoard/Add/index.handler
+    events:
+      - http:
+          method: post
+          path: leaderBoard/{quizId} 
+
+  GetLeaderBoardScore:
+    handler: functions/LeaderBoard/Get/index.handler
+    events:
+      - http:
+          method: get
+          path: leaderBoard/{quizId}
+
+
+
+
 resources:
   Resources:
 
