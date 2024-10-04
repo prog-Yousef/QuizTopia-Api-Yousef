@@ -42,6 +42,28 @@ functions:
           path: /quiz
           method: post
 
+
+  getQuiz:
+    handler: functions/Quiz/GetQuiz/index.handler
+    events:
+      - http:
+          method: get
+          path: quiz/{quizId}
+
+  getAllQuiz:
+    handler: functions/Quiz/GetAllQuizzes/index.handler
+    events:
+      - http:
+          path: quiz
+          method: get
+
+  deleteQuiz:
+    handler: functions/Quiz/DeleteQuiz/index.handler
+    events:
+      - http:
+          method: delete
+          path: quiz/{quizId} 
+
 resources:
   Resources:
 
