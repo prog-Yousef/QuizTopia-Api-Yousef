@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "fdbc8e5d-9f40-47c6-abfe-0c7655d38d68",
+		"name": "QuizoTopia_API_Yousef",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34250541"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"username\": \"test123245\",\r\n    \"password\": \"password12345\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/auth/signup",
+					"protocol": "https",
+					"host": [
+						"wzkx9xrdsh",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test123245\",\r\n    \"password\": \"password12345\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/auth/login",
+					"protocol": "https",
+					"host": [
+						"wzkx9xrdsh",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllQuiz",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetQuizbyId",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllQuiz Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1MDYzY2EzMS00ODBlLTRjZWYtYWIyZi1mNzE1OWEzMTYxZTYiLCJpYXQiOjE3MjgwNzY0OTYsImV4cCI6MTcyODA4MDA5Nn0.3H0fP0P13retJR2lOpGO_VN25PlCtno8WpeU2lDqDi8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/dd9189c9-fe63-49de-8b97-c9b50d9a63ad",
+					"protocol": "https",
+					"host": [
+						"wzkx9xrdsh",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"quiz",
+						"dd9189c9-fe63-49de-8b97-c9b50d9a63ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddQuestiontoSpecQuiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1MDYzY2EzMS00ODBlLTRjZWYtYWIyZi1mNzE1OWEzMTYxZTYiLCJpYXQiOjE3MjgwNzY0OTYsImV4cCI6MTcyODA4MDA5Nn0.3H0fP0P13retJR2lOpGO_VN25PlCtno8WpeU2lDqDi8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questions\": [\r\n        {\r\n            \"questionId\": \"q1\",\r\n            \"questionInfo\": {\r\n                \"question\": \"What does the term 'bull market' refer to?\",\r\n                \"options\": [\r\n                    \"A) A market in which prices are falling\",\r\n                    \"B) A market in which prices are rising\",\r\n                    \"C) A market with high volatility\",\r\n                    \"D) A market with low trading volume\"\r\n                ],\r\n                \"correctAnswer\": \"B) A market in which prices are rising\"\r\n            }\r\n        },\r\n        {\r\n            \"questionId\": \"q2\",\r\n            \"questionInfo\": {\r\n                \"question\": \"Which of the following is a common strategy used by traders to minimize risk?\",\r\n                \"options\": [\r\n                    \"A) Buying on margin\",\r\n                    \"B) Diversification\",\r\n                    \"C) Holding all assets in one stock\",\r\n                    \"D) Ignoring market trends\"\r\n                ],\r\n                \"correctAnswer\": \"B) Diversification\"\r\n            }\r\n        },\r\n        {\r\n            \"questionId\": \"q3\",\r\n            \"questionInfo\": {\r\n                \"question\": \"What is the primary purpose of a stock exchange?\",\r\n                \"options\": [\r\n                    \"A) To provide loans to businesses\",\r\n                    \"B) To facilitate the buying and selling of stocks\",\r\n                    \"C) To offer financial advice\",\r\n                    \"D) To determine stock prices\"\r\n                ],\r\n                \"correctAnswer\": \"B) To facilitate the buying and selling of stocks\"\r\n            }\r\n        },\r\n        {\r\n            \"questionId\": \"q4\",\r\n            \"questionInfo\": {\r\n                \"question\": \"Which of the following factors can influence stock prices?\",\r\n                \"options\": [\r\n                    \"A) Company earnings reports\",\r\n                    \"B) Economic indicators\",\r\n                    \"C) Political events\",\r\n                    \"D) All of the above\"\r\n                ],\r\n                \"correctAnswer\": \"D) All of the above\"\r\n            }\r\n        },\r\n        {\r\n            \"questionId\": \"q5\",\r\n            \"questionInfo\": {\r\n                \"question\": \"What does the term 'IPO' stand for?\",\r\n                \"options\": [\r\n                    \"A) Initial Public Offering\",\r\n                    \"B) International Purchase Option\",\r\n                    \"C) Initial Purchase Order\",\r\n                    \"D) Independent Pricing Option\"\r\n                ],\r\n                \"correctAnswer\": \"A) Initial Public Offering\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/quiz/00b0d352-2d53-4c62-aa24-fb09d94bf747/question",
+					"protocol": "https",
+					"host": [
+						"wzkx9xrdsh",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"quiz",
+						"00b0d352-2d53-4c62-aa24-fb09d94bf747",
+						"question"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddLeaderboardScore",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1MDYzY2EzMS00ODBlLTRjZWYtYWIyZi1mNzE1OWEzMTYxZTYiLCJpYXQiOjE3MjgwNzY0OTYsImV4cCI6MTcyODA4MDA5Nn0.3H0fP0P13retJR2lOpGO_VN25PlCtno8WpeU2lDqDi8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n  \"answers\": [\r\n    { \"answer\": \"B\" }, \r\n    { \"answer\": \"B\" },\r\n    { \"answer\": \"B\" },\r\n    { \"answer\": \"D\" },\r\n    { \"answer\": \"A\" }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/leaderBoard/00b0d352-2d53-4c62-aa24-fb09d94bf74",
+					"protocol": "https",
+					"host": [
+						"wzkx9xrdsh",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"leaderBoard",
+						"00b0d352-2d53-4c62-aa24-fb09d94bf74"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLeaderBoard",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1MDYzY2EzMS00ODBlLTRjZWYtYWIyZi1mNzE1OWEzMTYxZTYiLCJpYXQiOjE3MjgwNzY0OTYsImV4cCI6MTcyODA4MDA5Nn0.3H0fP0P13retJR2lOpGO_VN25PlCtno8WpeU2lDqDi8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wzkx9xrdsh.execute-api.eu-north-1.amazonaws.com/dev/leaderBoard/00b0d352-2d53-4c62-aa24-fb09d94bf74",
+					"protocol": "https",
+					"host": [
+						"wzkx9xrdsh",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"leaderBoard",
+						"00b0d352-2d53-4c62-aa24-fb09d94bf74"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
